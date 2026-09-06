@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Prompt Engineering Presentation</title>
+    <title>AI Tools & Learning Showcase Assignment</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;700&family=Anuphan:wght@300;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;600;700&family=Sarabun:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         * {
@@ -16,15 +16,51 @@
         }
 
         body {
-            background-color: #050505;
+            background-color: #08090c;
             min-height: 100vh;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            font-family: 'Anuphan', sans-serif;
-            color: #cccccc;
-            overflow: hidden;
-            position: relative;
+            font-family: 'Sarabun', sans-serif;
+            color: #d1d5db;
+            overflow-x: hidden;
+            padding: 20px 0;
+        }
+
+        /* Header / Topic Selector */
+        .header-nav {
+            width: 1280px;
+            max-width: 95vw;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #111318;
+            padding: 15px 25px;
+            border-radius: 12px;
+            border: 1px solid #222732;
+        }
+
+        .topic-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #00ff88;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .topic-select {
+            background: #1a1d26;
+            color: #fff;
+            border: 1px solid #00ff88;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-family: 'Sarabun', sans-serif;
+            font-size: 16px;
+            outline: none;
+            cursor: pointer;
         }
 
         /* Slide Viewport */
@@ -33,29 +69,30 @@
             width: 1280px;
             height: 720px;
             max-width: 95vw;
-            max-height: 95vh;
+            max-height: 80vh;
             border-radius: 16px;
             overflow: hidden;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
-            border: 1px solid #1a1a1a;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9);
+            border: 1px solid #222732;
+            background: #0d0f14;
         }
 
         .slides-container {
             display: flex;
             width: 500%; /* 5 slides x 100% */
             height: 100%;
-            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+            transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
         .slide-container {
             width: 20%; /* 100% / 5 slides */
             height: 100%;
-            background-color: #0f0f0f;
+            background-color: #0d0f14;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 60px;
+            padding: 50px 70px;
             position: relative;
             box-sizing: border-box;
             flex-shrink: 0;
@@ -68,16 +105,16 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at 90% 10%, rgba(0, 255, 136, 0.05) 0%, transparent 50%);
+            background: radial-gradient(circle at 90% 10%, rgba(0, 255, 136, 0.04) 0%, transparent 60%);
             z-index: 0;
         }
 
         .slide-container::after {
             content: '';
             position: absolute;
-            bottom: 30px;
+            bottom: 25px;
             right: 30px;
-            width: 150px;
+            width: 120px;
             height: 2px;
             background: #00ff88;
             box-shadow: 0 0 10px #00ff88;
@@ -91,24 +128,36 @@
 
         h1, h2, h3 {
             color: #ffffff;
-            font-family: 'Urbanist', sans-serif;
+            font-family: 'Urbanist', 'Sarabun', sans-serif;
+        }
+
+        .slide-badge {
+            display: inline-block;
+            background: rgba(0, 255, 136, 0.1);
+            color: #00ff88;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            border: 1px solid rgba(0, 255, 136, 0.3);
         }
 
         .slide-title {
-            font-size: 38px;
+            font-size: 36px;
             font-weight: 700;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             text-align: left;
             width: 100%;
             color: #00ff88;
-            border-left: 6px solid #00ff88;
-            padding-left: 20px;
+            border-left: 5px solid #00ff88;
+            padding-left: 18px;
         }
 
         p, li {
-            font-size: 20px;
+            font-size: 19px;
             line-height: 1.6;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
 
         strong {
@@ -117,17 +166,20 @@
 
         .title-layout {
             text-align: center;
+            max-width: 900px;
         }
 
         .title-layout h1 {
-            font-size: 72px;
-            letter-spacing: -2px;
-            margin-bottom: 20px;
+            font-size: 56px;
+            letter-spacing: -1px;
+            margin-bottom: 15px;
+            color: #fff;
         }
 
         .title-layout .subtitle {
-            font-size: 26px;
-            color: #888;
+            font-size: 24px;
+            color: #9ca3af;
+            margin-bottom: 25px;
         }
 
         .content-area {
@@ -141,142 +193,145 @@
 
         .two-column {
             display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
-            gap: 50px;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 40px;
             width: 100%;
             align-items: center;
         }
 
-        .image-wrapper {
-            border-radius: 16px;
-            height: 380px;
-            overflow: hidden;
-            border: 1px solid #333;
-            background: #111;
+        .result-box {
+            background: #141721;
+            border-radius: 12px;
+            padding: 25px;
+            border: 1px solid #222732;
+            width: 100%;
+            max-height: 400px;
+            overflow-y: auto;
         }
 
-        .image-wrapper img {
-            height: 100%;
-            width: 100%;
-            object-fit: cover;
+        .result-box code {
+            font-family: monospace;
+            color: #38bdf8;
+            white-space: pre-wrap;
+            font-size: 15px;
+        }
+
+        .link-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #00ff88;
+            color: #08090c;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .link-btn:hover {
+            background: #00cc6a;
+            box-shadow: 0 0 15px rgba(0, 255, 136, 0.4);
         }
 
         .tiled-content {
             display: flex;
-            gap: 25px;
+            gap: 20px;
             width: 100%;
             align-items: stretch;
         }
 
         .tile {
-            background-color: #161616;
-            border: 1px solid #222;
-            border-radius: 16px;
-            padding: 35px 25px;
+            background-color: #141721;
+            border: 1px solid #222732;
+            border-radius: 12px;
+            padding: 30px 20px;
             flex: 1;
             text-align: center;
         }
 
         .tile .icon {
-            font-size: 45px;
+            font-size: 40px;
             color: #00ff88;
-            margin-bottom: 20px;
-        }
-
-        .tile h3 {
-            font-size: 24px;
             margin-bottom: 15px;
         }
 
-        .bleed-image-layout {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            padding: 0;
-            align-items: center;
-        }
-
-        .bleed-text-side {
-            padding: 60px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .bleed-image-side {
-            width: 100%;
-            height: 720px;
-            object-fit: cover;
+        .tile h3 {
+            font-size: 22px;
+            margin-bottom: 12px;
         }
 
         .quote-layout {
             text-align: center;
-            max-width: 850px;
+            max-width: 900px;
         }
 
         .quote-layout blockquote {
-            font-size: 36px;
+            font-size: 32px;
             color: #fff;
-            line-height: 1.4;
+            line-height: 1.5;
             font-style: italic;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             position: relative;
         }
 
         .quote-layout blockquote::before {
             content: '“';
             color: #00ff88;
-            font-size: 100px;
+            font-size: 90px;
             position: absolute;
-            left: -50px;
-            top: -40px;
-            opacity: 0.3;
+            left: -40px;
+            top: -30px;
+            opacity: 0.25;
         }
 
-        .highlight-box {
+        .prompt-box {
             background: rgba(0, 255, 136, 0.05);
             border: 1px dashed #00ff88;
-            padding: 20px;
-            border-radius: 8px;
-            margin-top: 20px;
+            padding: 20px 25px;
+            border-radius: 10px;
+            margin-top: 15px;
             font-family: monospace;
             color: #00ff88;
             font-size: 18px;
+            text-align: left;
+            line-height: 1.5;
         }
 
-        /* Navigation Controls */
+        /* Controls */
         .nav-btn {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background: rgba(15, 15, 15, 0.7);
+            background: rgba(17, 19, 24, 0.8);
             border: 1px solid rgba(0, 255, 136, 0.3);
             color: #00ff88;
-            width: 50px;
-            height: 50px;
+            width: 46px;
+            height: 46px;
             border-radius: 50%;
             cursor: pointer;
             z-index: 10;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 20px;
+            font-size: 18px;
             transition: all 0.3s ease;
             backdrop-filter: blur(5px);
         }
 
         .nav-btn:hover {
             background: #00ff88;
-            color: #050505;
+            color: #08090c;
             box-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
         }
 
-        .prev-btn { left: 20px; }
-        .next-btn { right: 20px; }
+        .prev-btn { left: 15px; }
+        .next-btn { right: 15px; }
 
-        /* Pagination Indicators */
         .pagination {
             position: absolute;
-            bottom: 20px;
+            bottom: 18px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
@@ -285,8 +340,8 @@
         }
 
         .dot {
-            width: 12px;
-            height: 12px;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.2);
             cursor: pointer;
@@ -295,7 +350,7 @@
 
         .dot.active {
             background: #00ff88;
-            width: 30px;
+            width: 28px;
             border-radius: 10px;
             box-shadow: 0 0 8px #00ff88;
         }
@@ -303,108 +358,31 @@
 </head>
 <body>
 
+    <div class="header-nav">
+        <div class="topic-title">
+            <i class="fa-solid fa-layer-group"></i>
+            <span id="currentTopicName">1. การสร้างรูป ด้วย AI (Canva)</span>
+        </div>
+        <div>
+            <label for="topicSelect" style="margin-right: 10px; font-size: 14px;">เลือกหัวข้อการเรียนรู้:</label>
+            <select id="topicSelect" class="topic-select">
+                <option value="0">1. การสร้างรูป ด้วย AI (Canva)</option>
+                <option value="1">2. สื่ออธิบายคณิตศาสตร์ (Desmos)</option>
+                <option value="2">3. การสร้าง Diagrams (Mermaid.ai)</option>
+                <option value="3">4. บทความ/หนังสือ (LaTeX / Overleaf)</option>
+                <option value="4">5. Slide สรุปงาน (NotebookLM)</option>
+                <option value="5">6. เว็บไซต์และฝากไฟล์ (GitHub)</option>
+            </select>
+        </div>
+    </div>
+
     <div class="slider-wrapper">
-        <!-- Navigation Buttons -->
         <button class="nav-btn prev-btn" id="prevBtn"><i class="fa-solid fa-chevron-left"></i></button>
         <button class="nav-btn next-btn" id="nextBtn"><i class="fa-solid fa-chevron-right"></i></button>
 
-        <!-- Slides Wrapper -->
         <div class="slides-container" id="slidesContainer">
-
-            <!-- Slide 1: Zero Shot Prompt -->
-            <div class="slide-container" id="slide1">
-                <div class="title-layout">
-                    <h2 style="color: #00ff88; letter-spacing: 5px; font-size: 20px; margin-bottom: 10px;">ข้อที่ 1</h2>
-                    <h1>ZERO-SHOT <span>PROMPT</span></h1>
-                    <p class="subtitle">หัวข้อ: แผนการตลาดขวดน้ำรักษ์โลกแบบหรูหรา</p>
-                    <div class="highlight-box">
-                        "จงสร้างแผนการตลาดเบื้องต้นสำหรับแบรนด์ขวดน้ำรักษ์โลกใหม่ที่เน้นความหรูหราและดีไซน์"
-                    </div>
-                </div>
             </div>
 
-            <!-- Slide 2: Initial Result -->
-            <div class="slide-container" id="slide2">
-                <h2 class="slide-title">ข้อที่ 2: ผลลัพธ์ครั้งแรก (Zero-Shot Output)</h2>
-                <div class="content-area">
-                    <div class="two-column">
-                        <div>
-                            <p><strong>ลักษณะผลลัพธ์ที่ได้:</strong></p>
-                            <ul style="list-style: none; padding-left: 0;">
-                                <li><i class="fa-solid fa-xmark" style="color: #ff4444; margin-right: 10px;"></i> ให้เนื้อหาที่ <strong>กว้างเกินไป</strong> ไม่เจาะจงจุดเด่น</li>
-                                <li><i class="fa-solid fa-xmark" style="color: #ff4444; margin-right: 10px;"></i> แผนการตลาดเป็นแบบ <strong>มาตรฐาน</strong> ที่หาได้ทั่วไป</li>
-                                <li><i class="fa-solid fa-xmark" style="color: #ff4444; margin-right: 10px;"></i> ขาดอารมณ์ความรู้สึกที่สื่อถึงความ <strong>หรูหรา</strong></li>
-                                <li><i class="fa-solid fa-xmark" style="color: #ff4444; margin-right: 10px;"></i> AI ไม่เข้าใจบริบทเฉพาะของกลุ่มลูกค้า High-end</li>
-                            </ul>
-                        </div>
-                        <div class="image-wrapper">
-                            <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=1000&auto=format&fit=crop" alt="Generic Business Result">
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Slide 3: Few Shot / Refinement -->
-            <div class="slide-container" id="slide3">
-                <h2 class="slide-title">ข้อที่ 3: การเพิ่มรายละเอียด (Few-Shot Prompt)</h2>
-                <div class="content-area">
-                    <div class="tiled-content">
-                        <div class="tile">
-                            <div class="icon"><i class="fa-solid fa-user-tie"></i></div>
-                            <h3>Persona</h3>
-                            <p>กำหนดบทบาท AI เป็น <strong>Luxury Brand Strategist</strong> ที่เคยทำงานกับแบรนด์ชั้นนำระดับโลก</p>
-                        </div>
-                        <div class="tile">
-                            <div class="icon"><i class="fa-solid fa-bullseye"></i></div>
-                            <h3>Context</h3>
-                            <p>ระบุกลุ่มเป้าหมายคือ <strong>Ultra High Net Worth</strong> ที่สนใจเรื่องความยั่งยืนเป็นพิเศษ</p>
-                        </div>
-                        <div class="tile">
-                            <div class="icon"><i class="fa-solid fa-lightbulb"></i></div>
-                            <h3>Examples</h3>
-                            <p>ให้ตัวอย่างแคมเปญแบบ <strong>Exclusivity</strong> เช่น การใช้การ์ดเชิญพิเศษแทนการยิงโฆษณาทั่วไป</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Slide 4: New Result -->
-            <div class="slide-container bleed-image-layout" id="slide4">
-                <div class="bleed-text-side">
-                    <h2 class="slide-title" style="margin-bottom: 20px;">ข้อที่ 4: ผลลัพธ์ใหม่</h2>
-                    <div class="content-area">
-                        <p><strong>ความแตกต่างที่เห็นได้ชัด:</strong></p>
-                        <ul style="list-style: none; padding-left: 0;">
-                            <li><i class="fa-solid fa-check" style="color: #00ff88; margin-right: 10px;"></i> ชื่อแบรนด์ <strong>"Aura Glass"</strong> ที่ดูแพงและมีระดับ</li>
-                            <li><i class="fa-solid fa-check" style="color: #00ff88; margin-right: 10px;"></i> กลยุทธ์การขายแบบ <strong>Limited Edition</strong></li>
-                            <li><i class="fa-solid fa-check" style="color: #00ff88; margin-right: 10px;"></i> เน้นช่องทางขายผ่าน <strong>Private Yacht Clubs</strong></li>
-                        </ul>
-                        <div class="highlight-box" style="font-size: 16px; margin-top: 10px;">
-                            "แผนมีความลึกซึ้งและมีทิศทางที่ชัดเจน พร้อมใช้งานจริง"
-                        </div>
-                    </div>
-                </div>
-                <div style="height: 100%;">
-                    <img class="bleed-image-side" src="https://images.unsplash.com/photo-1602143407151-7111542de6e8?q=80&w=1000&auto=format&fit=crop" alt="Luxury Product">
-                </div>
-            </div>
-
-            <!-- Slide 5: Reflection -->
-            <div class="slide-container" id="slide5">
-                <h2 class="slide-title">ข้อที่ 5: สะท้อนการเรียนรู้</h2>
-                <div class="content-area">
-                    <div class="quote-layout">
-                        <blockquote>
-                            "คุณภาพของคำสั่ง (Input) กำหนดคุณภาพของคำตอบ (Output) การทำ Prompt Engineering ไม่ใช่แค่การสั่งงาน แต่คือการสื่อสารบริบทให้แม่นยำ"
-                        </blockquote>
-                        <p style="color: #888;">— บทสรุปจากการเปรียบเทียบ Zero-Shot vs Few-Shot</p>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- Pagination Dots -->
         <div class="pagination" id="pagination">
             <div class="dot active" data-index="0"></div>
             <div class="dot" data-index="1"></div>
@@ -414,65 +392,221 @@
         </div>
     </div>
 
-    <!-- JavaScript Slider Logic -->
     <script>
-        const container = id => document.getElementById(id);
-        const slidesContainer = container('slidesContainer');
-        const prevBtn = container('prevBtn');
-        const nextBtn = container('nextBtn');
-        const dots = document.querySelectorAll('.dot');
-        
-        let currentIndex = 0;
-        const totalSlides = 5;
-
-        function updateSlide() {
-            slidesContainer.style.transform = `translateX(-${currentIndex * 20}%)`;
-            dots.forEach((dot, index) => {
-                dot.classList.toggle('active', index === currentIndex);
-            });
-        }
-
-        function nextSlide() {
-            currentIndex = (currentIndex + 1) % totalSlides;
-            updateSlide();
-        }
-
-        function prevSlide() {
-            currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
-            updateSlide();
-        }
-
-        // Button Clicks
-        nextBtn.addEventListener('click', nextSlide);
-        prevBtn.addEventListener('click', prevSlide);
-
-        // Dot Clicks
-        dots.forEach(dot => {
-            dot.addEventListener('click', (e) => {
-                currentIndex = parseInt(e.target.dataset.index);
-                updateSlide();
-            });
-        });
-
-        // Keyboard Controls (Arrow Left / Right)
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight') nextSlide();
-            if (e.key === 'ArrowLeft') prevSlide();
-        });
-
-        // Touch Swipe Support for Mobile
-        let touchStartX = 0;
-        let touchEndX = 0;
-
-        document.addEventListener('touchstart', e => {
-            touchStartX = e.changedTouches[0].screenX;
-        });
-
-        document.addEventListener('touchend', e => {
-            touchEndX = e.changedTouches[0].screenX;
-            if (touchStartX - touchEndX > 50) nextSlide();
-            if (touchEndX - touchStartX > 50) prevSlide();
-        });
-    </script>
-</body>
-</html>
+        const topicsData = [
+            {
+                name: "1. การสร้างรูป ด้วย AI (Canva)",
+                toolLink: "https://www.canva.com/",
+                slides: [
+                    {
+                        step: "ข้อ 1: Zero-Shot Prompt",
+                        title: "Prompt แรกสำหรับการสร้างภาพ AI",
+                        subtitle: "การสร้างโปสเตอร์ประชาสัมพันธ์สินค้าแบรนด์น้ำรักษ์โลก",
+                        prompt: "วาดภาพโปสเตอร์โฆษณาขวดน้ำรักษ์โลกสไตล์มินิมอล มีธรรมชาติและหยดน้ำ"
+                    },
+                    {
+                        step: "ข้อ 2: ผลลัพธ์ครั้งแรก (Zero-Shot Output)",
+                        title: "ผลลัพธ์ของ Prompt แรก",
+                        details: [
+                            "ภาพที่ได้เป็นขวดน้ำทั่วไปพร้อมพื้นหลังต้นไม้แบบกว้างๆ",
+                            "ขาดความโดดเด่นขององค์ประกอบและเอกลักษณ์แบรนด์",
+                            "ยังไม่สามารถนำไปใช้งานเชิงพาณิชย์หรือโฆษณาจริงได้ทันที"
+                        ],
+                        linkText: "เปิดดูเครื่องมือ Canva",
+                        linkUrl: "https://www.canva.com/",
+                        codeSnippet: "[ผลลัพธ์ภาพ: ขวดน้ำพลาสติกธรรมดาบนพื้นหญ้า โทนสีเขียวทั่วไป ขาด Typography และการจัดวางโฆษณา]"
+                    },
+                    {
+                        step: "ข้อ 3: การเพิ่มรายละเอียด (Few-Shot Prompt)",
+                        title: "การถาม-ตอบ และปรับแต่งบริบทใหม่",
+                        tiles: [
+                            { icon: "fa-palette", title: "Style & Lighting", desc: "ระบุสไตล์ Studio Lighting, Cyberpunk Minimalist และ Cinematic Tone" },
+                            { icon: "fa-cubes", title: "Composition", desc: "กำหนดองค์ประกอบ: วางขวดแก้วรีไซเคิลตรงกลาง มีหยดน้ำค้างใส และฉากหลังสะท้อนแสงนีออนเขียว" },
+                            { icon: "fa-bullseye", title: "Examples", desc: "อ้างอิงสไตล์ภาพโฆษณาระดับ Hi-End เช่น แคมเปญโฆษณาจากแบรนด์ชั้นนำ" }
+                        ]
+                    },
+                    {
+                        step: "ข้อ 4: ผลลัพธ์ของ Prompt ใหม่ (Few-Shot Output)",
+                        title: "ผลลัพธ์ใหม่หลังการ Fine-Tune",
+                        details: [
+                            "ภาพมีความคมชัดระดับ 8K พร้อมแสงเงาแบบ Studio Professional",
+                            "ขวดน้ำแก้วรีไซเคิลพร้อมโลโก้มินิมอล มีหยดน้ำเกาะรอบขวดสมจริง",
+                            "การจัดวางองค์ประกอบพร้อมรองรับการใส่ข้อความโฆษณาได้ทันที"
+                        ],
+                        linkText: "ดูผลงานบน Canva / Image Link",
+                        linkUrl: "https://www.canva.com/",
+                        codeSnippet: "[ผลลัพธ์ภาพใหม่: ขวดน้ำแก้วดีไซน์หรูหรา วางบนพื้นหินสีเข้มพร้อมหยดน้ำระยิบระยับ แสงไฟ Soft Studio Light สวยงาม]"
+                    },
+                    {
+                        step: "ข้อ 5: สะท้อนการเรียนรู้ (Reflection)",
+                        title: "การสะท้อนการเรียนรู้ (Reflection)",
+                        quote: "การสั่งงาน AI สร้างรูปภาพ (Image Generation) ต้องระบุทั้ง Style, Lighting, Composition และ Mood & Tone อย่างชัดเจน การเพิ่มตัวอย่างสไตล์ที่ต้องการจะช่วยลดความสุ่ม (Randomness) และได้ผลงานตรงตามความต้องการมากขึ้น"
+                    }
+                ]
+            },
+            {
+                name: "2. สื่ออธิบายคณิตศาสตร์ (Desmos)",
+                toolLink: "https://www.desmos.com/calculator?lang=th",
+                slides: [
+                    {
+                        step: "ข้อ 1: Zero-Shot Prompt",
+                        title: "Prompt แรกสำหรับสร้างกราฟคณิตศาสตร์",
+                        subtitle: "การสร้างกราฟเพื่ออธิบายความสัมพันธ์ฟังก์ชันกำลังสอง",
+                        prompt: "เขียนสมการกราฟพาราโบลาใน Desmos ให้ดูหน่อย"
+                    },
+                    {
+                        step: "ข้อ 2: ผลลัพธ์ครั้งแรก (Zero-Shot Output)",
+                        title: "ผลลัพธ์ของ Prompt แรก",
+                        details: [
+                            "ได้สมการพื้นฐาน y = x^2 เพียงเส้นเดียว",
+                            "ไม่มีตัวแปรปรับเปลี่ยน (Slider) สำหรับอธิบายการเปลี่ยนรูปของกราฟ",
+                            "ไม่เห็นภาพความสัมพันธ์ระหว่างตัวแปร h, k และ a"
+                        ],
+                        linkText: "เปิด Desmos Calculator",
+                        linkUrl: "https://www.desmos.com/calculator?lang=th",
+                        codeSnippet: "y = x^2"
+                    },
+                    {
+                        step: "ข้อ 3: การเพิ่มรายละเอียด (Few-Shot Prompt)",
+                        title: "การปรับแต่ง Prompt เพิ่มเติม",
+                        tiles: [
+                            { icon: "fa-sliders", title: "Dynamic Sliders", desc: "ให้ AI สร้างสมการรูป Vertex Form: y = a(x-h)^2 + k พร้อมตั้งค่า Slider a, h, k" },
+                            { icon: "fa-chart-line", title: "Key Points", desc: "เพิ่มจุดยอด Vertex (h,k) และจุดตัดแกน X/Y พร้อมแสดงฉลากกำกับ" },
+                            { icon: "fa-graduation-cap", title: "Educational Notes", desc: "ใส่เงื่อนไขแสดงทิศทางกราฟหงาย/คว่ำ ตามค่าของตัวแปร a" }
+                        ]
+                    },
+                    {
+                        step: "ข้อ 4: ผลลัพธ์ของ Prompt ใหม่ (Few-Shot Output)",
+                        title: "ผลลัพธ์ใหม่ interactive บน Desmos",
+                        details: [
+                            "ได้ชุดสมการพร้อม Slider ปรับค่า a, h, k แบบเรียลไทม์",
+                            "จุด Vertex และแกนสมมาตรปรับเปลี่ยนตามการเลื่อน Slider อัตโนมัติ",
+                            "เป็นสื่อการสอนคณิตศาสตร์ที่มองเห็นภาพความสัมพันธ์ชัดเจน"
+                        ],
+                        linkText: "เปิดดู Graph บน Desmos",
+                        linkUrl: "https://www.desmos.com/calculator?lang=th",
+                        codeSnippet: "y = a(x - h)^2 + k\na = 1 [-5..5]\nh = 0 [-5..5]\nk = 0 [-5..5]\n(h, k) label: Vertex"
+                    },
+                    {
+                        step: "ข้อ 5: สะท้อนการเรียนรู้ (Reflection)",
+                        title: "การสะท้อนการเรียนรู้ (Reflection)",
+                        quote: "การใช้ AI ช่วยสร้างสื่อคณิตศาสตร์ ไม่ใช่แค่การขอสูตรคำนวณ แต่คือการสั่งให้โครงสร้างข้อมูลสามารถ Interactive ได้ การกำหนดตัวแปรให้เป็น Slider ช่วยให้เข้าใจพฤติกรรมของฟังก์ชันคณิตศาสตร์ได้อย่างเป็นรูปธรรม"
+                    }
+                ]
+            },
+            {
+                name: "3. การสร้าง Diagrams (Mermaid.ai)",
+                toolLink: "https://mermaid.ai/",
+                slides: [
+                    {
+                        step: "ข้อ 1: Zero-Shot Prompt",
+                        title: "Prompt แรกสร้าง Diagram",
+                        subtitle: "ผังกระบวนการทำงานของระบบสแกนชำระเงิน",
+                        prompt: "เขียนโค้ด Mermaid Diagram สำหรับระบบชำระเงินออนไลน์"
+                    },
+                    {
+                        step: "ข้อ 2: ผลลัพธ์ครั้งแรก (Zero-Shot Output)",
+                        title: "ผลลัพธ์ของ Prompt แรก",
+                        details: [
+                            "ได้ไดอะแกรม flowchart อย่างง่าย มีเพียง A -> B -> C",
+                            "ขาดขั้นตอนการตรวจสอบเงื่อนไข (Error Handling / Fail cases)",
+                            "ไม่แบ่งเลนการทำงาน (Swimlanes) ระหว่าง User, System และ Bank"
+                        ],
+                        linkText: "เปิด Mermaid Live Editor",
+                        linkUrl: "https://mermaid.live/",
+                        codeSnippet: "graph TD\n    A[Customer] --> B[Pay]\n    B --> C[Success]"
+                    },
+                    {
+                        step: "ข้อ 3: การเพิ่มรายละเอียด (Few-Shot Prompt)",
+                        title: "การปรับปรุงโครงสร้าง Diagram",
+                        tiles: [
+                            { icon: "fa-diagram-project", title: "Sequence Diagram", desc: "เปลี่ยนจาก Flowchart เป็น Sequence Diagram แสดงการคุยกันระหว่างระบบ" },
+                            { icon: "fa-shield-halved", title: "Exception Cases", desc: "เพิ่มขั้นตอน OTP Validation, Insufficient Balance และ Payment Timeout" },
+                            { icon: "fa-paint-brush", title: "Styling & Themes", desc: "ใส่สีสันแยกประเภท Node และกำหนด Subgraph ให้ชัดเจน" }
+                        ]
+                    },
+                    {
+                        step: "ข้อ 4: ผลลัพธ์ของ Prompt ใหม่ (Few-Shot Output)",
+                        title: "ผลลัพธ์โค้ด Mermaid สมบูรณ์",
+                        details: [
+                            "Sequence Diagram ครอบคลุมทั้งกรณีชำระเงินสำเร็จและล้มเหลว",
+                            "แสดงการรับส่งข้อมูลระหว่าง User -> Gateway -> Bank API ชัดเจน",
+                            "พร้อมนำโค้ดไป Render เป็นภาพประกอบสไลด์หรือเอกสารระบบ"
+                        ],
+                        linkText: "เปิดเรนเดอร์ไดอะแกรมบน Mermaid",
+                        linkUrl: "https://mermaid.live/",
+                        codeSnippet: "sequenceDiagram\n    autonumber\n    actor U as User\n    participant G as Payment Gateway\n    participant B as Bank System\n    U->>G: Request Payment\n    G->>B: Verify Balance\n    alt Balance Sufficient\n        B-->>G: Approve Transaction\n        G-->>U: Show Success Screen\n    else Insufficient\n        B-->>G: Reject Transaction\n        G-->>U: Show Error Message\n    end"
+                    },
+                    {
+                        step: "ข้อ 5: สะท้อนการเรียนรู้ (Reflection)",
+                        title: "การสะท้อนการเรียนรู้ (Reflection)",
+                        quote: "การเจนไดอะแกรมด้วย Text-to-Diagram (Mermaid) ต้องระบุประเภทของ Diagram (เช่น Flowchart, Sequence, ERD) และขั้นตอนการทำงานทางธุรกิจ (Business Logic) ทั้ง Happy Path และ Edge Cases ให้ครบถ้วน"
+                    }
+                ]
+            },
+            {
+                name: "4. บทความ/หนังสือ (LaTeX / Overleaf)",
+                toolLink: "https://www.overleaf.com/",
+                slides: [
+                    {
+                        step: "ข้อ 1: Zero-Shot Prompt",
+                        title: "Prompt แรกสำหรับ Overleaf (LaTeX)",
+                        subtitle: "การจัดทำบทความวิจัยทางวิศวกรรม",
+                        prompt: "เขียนโค้ด LaTeX สำหรับทำรายงานวิจัยวิศวกรรม 1 หน้า"
+                    },
+                    {
+                        step: "ข้อ 2: ผลลัพธ์ครั้งแรก (Zero-Shot Output)",
+                        title: "ผลลัพธ์ของ Prompt แรก",
+                        details: [
+                            "ได้โครงสร้าง \\documentclass{article} พื้นฐาน",
+                            "ไม่มีรูปแบบสองคอลัมน์ (Two-column format) แบบงานวิจัย IEEE",
+                            "ขาดการจัดรูปสมการคณิตศาสตร์ และตารางข้อมูล"
+                        ],
+                        linkText: "เปิดใช้งาน Overleaf",
+                        linkUrl: "https://www.overleaf.com/",
+                        codeSnippet: "\\documentclass{article}\n\\begin{document}\n\\title{My Report}\n\\maketitle\nHello World\n\\end{document}"
+                    },
+                    {
+                        step: "ข้อ 3: การเพิ่มรายละเอียด (Few-Shot Prompt)",
+                        title: "การปรับแต่งรูปแบบ LaTeX สไตล์วิชาการ",
+                        tiles: [
+                            { icon: "fa-file-lines", title: "IEEE Template", desc: "กำหนดใช้ \\documentclass[conference]{IEEEtran} รูปแบบสองคอลัมน์" },
+                            { icon: "fa-square-root-variable", title: "Math & Tables", desc: "เพิ่ม Package amsmath, graphicx และโครงสร้างตารางเปรียบเทียบข้อมูล" },
+                            { icon: "fa-book-bookmark", title: "BibTeX Citations", desc: "สร้างการอ้างอิงบรรณานุกรมอัตโนมัติด้วย BibTeX" }
+                        ]
+                    },
+                    {
+                        step: "ข้อ 4: ผลลัพธ์ของ Prompt ใหม่ (Few-Shot Output)",
+                        title: "โค้ด LaTeX ที่พร้อมคอมไพล์บน Overleaf",
+                        details: [
+                            "จัดรูปเล่มมาตรฐานงานวิจัยระดับสากล มีหน้าบทคัดย่อสองภาษา",
+                            "ตารางสรุปผลและสมการจัดวางสวยงาม ไม่หลุดขอบหน้ากระดาษ",
+                            "นำไปกด Compile เป็นไฟล์ PDF ส่งงานวิชาการได้ทันที"
+                        ],
+                        linkText: "เปิดโปรเจกต์บน Overleaf",
+                        linkUrl: "https://www.overleaf.com/",
+                        codeSnippet: "\\documentclass[conference]{IEEEtran}\n\\usepackage{cite,amsmath,graphicx}\n\\begin{document}\n\\title{AI Performance Analysis}\n\\author{\\IEEEauthorblockN{Student Name}}\n\\maketitle\n\\begin{abstract}This paper presents...\\end{abstract}\n\\section{Introduction}\n\\end{document}"
+                    },
+                    {
+                        step: "ข้อ 5: สะท้อนการเรียนรู้ (Reflection)",
+                        title: "การสะท้อนการเรียนรู้ (Reflection)",
+                        quote: "LaTeX ช่วยให้เอกสารวิชาการมีความเป็นมืออาชีพสูง แต่ต้องการ Prompt ที่ระบุโครงสร้าง Package และ Template (เช่น IEEE, Elsevier) ที่ชัดเจน เพื่อป้องกันปัญหาคอมไพล์ไม่ผ่านหรือจัดหน้าผิดเพี้ยน"
+                    }
+                ]
+            },
+            {
+                name: "5. Slide สรุปงาน (NotebookLM)",
+                toolLink: "https://notebook.google/?hl=th",
+                slides: [
+                    {
+                        step: "ข้อ 1: Zero-Shot Prompt",
+                        title: "Prompt แรกสำหรับ NotebookLM",
+                        subtitle: "การสรุปเอกสารงานวิจัยความยาว 30 หน้าให้เป็นสไลด์",
+                        prompt: "สรุปเอกสารที่อัปโหลดนี้ให้เป็นสไลด์นำเสนอหน่อย"
+                    },
+                    {
+                        step: "ข้อ 2: ผลลัพธ์ครั้งแรก (Zero-Shot Output)",
+                        title: "ผลลัพธ์ของ Prompt แรก",
+                        details: [
+                            "ได้สรุปเนื้อหาเป็นข้อความยาวๆ รวมกันอยู่ในย่อหน้าเดียว",
+                            "ไม่ได้แบ่งเป็นสไลด์
