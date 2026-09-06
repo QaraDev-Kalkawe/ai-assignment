@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Prompt Engineering Presentation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;700&family=Anuphan:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #050505;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Anuphan', sans-serif;
+            color: #cccccc;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Slide Viewport */
+        .slider-wrapper {
+            position: relative;
+            width: 1280px;
+            height: 720px;
+            max-width: 95vw;
+            max-height: 95vh;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+            border: 1px solid #1a1a1a;
+        }
+
+        .slides-container {
+            display: flex;
+            width: 500%; /* 5 slides x 100% */
+            height: 100%;
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .slide-container {
+            width: 20%; /* 100% / 5 slides */
+            height: 100%;
+            background-color: #0f0f0f;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px;
+            position: relative;
+            box-sizing: border-box;
+            flex-shrink: 0;
+        }
+
+        .slide-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 90% 10%, rgba(0, 255, 136, 0.05) 0%, transparent 50%);
+            z-index: 0;
+        }
+
+        .slide-container::after {
+            content: '';
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            width: 150px;
+            height: 2px;
+            background: #00ff88;
+            box-shadow: 0 0 10px #00ff88;
+            z-index: 0;
+        }
+
+        .slide-container > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        h1, h2, h3 {
+            color: #ffffff;
+            font-family: 'Urbanist', sans-serif;
+        }
+
+        .slide-title {
+            font-size: 38px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            text-align: left;
+            width: 100%;
+            color: #00ff88;
+            border-left: 6px solid #00ff88;
+            padding-left: 20px;
+        }
+
+        p, li {
+            font-size: 20px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        strong {
+            color: #00ff88;
+        }
+
+        .title-layout {
+            text-align: center;
+        }
+
+        .title-layout h1 {
+            font-size: 72px;
+            letter-spacing: -2px;
+            margin-bottom: 20px;
+        }
+
+        .title-layout .subtitle {
+            font-size: 26px;
+            color: #888;
+        }
+
+        .content-area {
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 50px;
+            width: 100%;
+            align-items: center;
+        }
+
+        .image-wrapper {
+            border-radius: 16px;
+            height: 380px;
+            overflow: hidden;
+            border: 1px solid #333;
+            background: #111;
+        }
+
+        .image-wrapper img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .tiled-content {
+            display: flex;
+            gap: 25px;
+            width: 100%;
+            align-items: stretch;
+        }
+
+        .tile {
+            background-color: #161616;
+            border: 1px solid #222;
+            border-radius: 16px;
+            padding: 35px 25px;
+            flex: 1;
+            text-align: center;
+        }
+
+        .tile .icon {
+            font-size: 45px;
+            color: #00ff88;
+            margin-bottom: 20px;
+        }
+
+        .tile h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .bleed-image-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            padding: 0;
+            align-items: center;
+        }
+
+        .bleed-text-side {
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .bleed-image-side {
+            width: 100%;
+            height: 720px;
+            object-fit: cover;
+        }
+
+        .quote-layout {
+            text-align: center;
+            max-width: 850px;
+        }
+
+        .quote-layout blockquote {
+            font-size: 36px;
+            color: #fff;
+            line-height: 1.4;
+            font-style: italic;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .quote-layout blockquote::before {
+            content: '“';
+            color: #00ff88;
+            font-size: 100px;
+            position: absolute;
+            left: -50px;
+            top: -40px;
+            opacity: 0.3;
+        }
+
+        .highlight-box {
+            background: rgba(0, 255, 136, 0.05);
+            border: 1px dashed #00ff88;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-family: monospace;
+            color: #00ff88;
+            font-size: 18px;
+        }
+
+        /* Navigation Controls */
+        .nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(15, 15, 15, 0.7);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            color: #00ff88;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .nav-btn:hover {
+            background: #00ff88;
+            color: #050505;
+            box-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
+        }
+
+        .prev-btn { left: 20px; }
+        .next-btn { right: 20px; }
+
+        /* Pagination Indicators */
+        .pagination {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background: #00ff88;
+            width: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 8px #00ff88;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="slider-wrapper">
+        <!-- Navigation Buttons -->
+        <button class="nav-btn prev-btn" id="prevBtn"><i class="fa-solid fa-chevron-left"></i></button>
+        <button class="nav-btn next-btn" id="nextBtn"><i class="fa-solid fa-chevron-right"></i></button>
+
+        <!-- Slides Wrapper -->
+        <div class="slides-container" id="slidesContainer">
+
+            <!-- Slide 1: Zero Shot Prompt -->
+            <div class="slide-container" id="slide1">
+                <div class="title-layout">
+                    <h2 style="color: #00ff88; letter-spacing: 5px; font-size: 20px; margin-bottom: 10px;">ข้อที่ 1</h2>
+                    <h1>ZERO-SHOT <span>PROMPT</span></h1>
+                    <p class="subtitle">หัวข้อ: แผนการตลาดขวดน้ำรักษ์โลกแบบหรูหรา</p>
+                    <div class="highlight-box">
+                        "จงสร้างแผนการตลาดเบื้องต้นสำหรับแบรนด์ขวดน้ำรักษ์โลกใหม่ที่เน้นความหรูหราและดีไซน์"
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 2: Initial Result -->
+            <div class="slide-container" id="slide2">
+                <h2 class="slide-title">ข้อที่ 2: ผลลัพธ์ครั้งแรก (Zero-Shot Output)</h2>
+                <div class="content-area">
+                    <div class="two-column">
+                        <div>
+                            <p><strong>ลักษณะผลลัพธ์ที่ได้:</strong></p>
+                            <ul style="list-style: none; padding-left: 0;">
+                                <li><i class="fa-solid fa-xmark" style="color: #ff4444; margin-right: 10px;"></i> ให้เนื้อหาที่ <strong>กว้างเกินไป</strong> ไม่เจาะจงจุดเด่น</li>
+                                <li><i class="fa-solid fa-xmark" style="color: #ff4444; margin-right: 10px;"></i> แผนการตลาดเป็นแบบ <strong>มาตรฐาน</strong> ที่หาได้ทั่วไป</li>
+                                <li><i class="fa-solid fa-xmark" style="color: #ff4444; margin-right: 10px;"></i> ขาดอารมณ์ความรู้สึกที่สื่อถึงความ <strong>หรูหรา</strong></li>
+                                <li><i class="fa-solid fa-xmark" style="color: #ff4444; margin-right: 10px;"></i> AI ไม่เข้าใจบริบทเฉพาะของกลุ่มลูกค้า High-end</li>
+                            </ul>
+                        </div>
+                        <div class="image-wrapper">
+                            <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=1000&auto=format&fit=crop" alt="Generic Business Result">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3: Few Shot / Refinement -->
+            <div class="slide-container" id="slide3">
+                <h2 class="slide-title">ข้อที่ 3: การเพิ่มรายละเอียด (Few-Shot Prompt)</h2>
+                <div class="content-area">
+                    <div class="tiled-content">
+                        <div class="tile">
+                            <div class="icon"><i class="fa-solid fa-user-tie"></i></div>
+                            <h3>Persona</h3>
+                            <p>กำหนดบทบาท AI เป็น <strong>Luxury Brand Strategist</strong> ที่เคยทำงานกับแบรนด์ชั้นนำระดับโลก</p>
+                        </div>
+                        <div class="tile">
+                            <div class="icon"><i class="fa-solid fa-bullseye"></i></div>
+                            <h3>Context</h3>
+                            <p>ระบุกลุ่มเป้าหมายคือ <strong>Ultra High Net Worth</strong> ที่สนใจเรื่องความยั่งยืนเป็นพิเศษ</p>
+                        </div>
+                        <div class="tile">
+                            <div class="icon"><i class="fa-solid fa-lightbulb"></i></div>
+                            <h3>Examples</h3>
+                            <p>ให้ตัวอย่างแคมเปญแบบ <strong>Exclusivity</strong> เช่น การใช้การ์ดเชิญพิเศษแทนการยิงโฆษณาทั่วไป</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 4: New Result -->
+            <div class="slide-container bleed-image-layout" id="slide4">
+                <div class="bleed-text-side">
+                    <h2 class="slide-title" style="margin-bottom: 20px;">ข้อที่ 4: ผลลัพธ์ใหม่</h2>
+                    <div class="content-area">
+                        <p><strong>ความแตกต่างที่เห็นได้ชัด:</strong></p>
+                        <ul style="list-style: none; padding-left: 0;">
+                            <li><i class="fa-solid fa-check" style="color: #00ff88; margin-right: 10px;"></i> ชื่อแบรนด์ <strong>"Aura Glass"</strong> ที่ดูแพงและมีระดับ</li>
+                            <li><i class="fa-solid fa-check" style="color: #00ff88; margin-right: 10px;"></i> กลยุทธ์การขายแบบ <strong>Limited Edition</strong></li>
+                            <li><i class="fa-solid fa-check" style="color: #00ff88; margin-right: 10px;"></i> เน้นช่องทางขายผ่าน <strong>Private Yacht Clubs</strong></li>
+                        </ul>
+                        <div class="highlight-box" style="font-size: 16px; margin-top: 10px;">
+                            "แผนมีความลึกซึ้งและมีทิศทางที่ชัดเจน พร้อมใช้งานจริง"
+                        </div>
+                    </div>
+                </div>
+                <div style="height: 100%;">
+                    <img class="bleed-image-side" src="https://images.unsplash.com/photo-1602143407151-7111542de6e8?q=80&w=1000&auto=format&fit=crop" alt="Luxury Product">
+                </div>
+            </div>
+
+            <!-- Slide 5: Reflection -->
+            <div class="slide-container" id="slide5">
+                <h2 class="slide-title">ข้อที่ 5: สะท้อนการเรียนรู้</h2>
+                <div class="content-area">
+                    <div class="quote-layout">
+                        <blockquote>
+                            "คุณภาพของคำสั่ง (Input) กำหนดคุณภาพของคำตอบ (Output) การทำ Prompt Engineering ไม่ใช่แค่การสั่งงาน แต่คือการสื่อสารบริบทให้แม่นยำ"
+                        </blockquote>
+                        <p style="color: #888;">— บทสรุปจากการเปรียบเทียบ Zero-Shot vs Few-Shot</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Pagination Dots -->
+        <div class="pagination" id="pagination">
+            <div class="dot active" data-index="0"></div>
+            <div class="dot" data-index="1"></div>
+            <div class="dot" data-index="2"></div>
+            <div class="dot" data-index="3"></div>
+            <div class="dot" data-index="4"></div>
+        </div>
+    </div>
+
+    <!-- JavaScript Slider Logic -->
+    <script>
+        const container = id => document.getElementById(id);
+        const slidesContainer = container('slidesContainer');
+        const prevBtn = container('prevBtn');
+        const nextBtn = container('nextBtn');
+        const dots = document.querySelectorAll('.dot');
+        
+        let currentIndex = 0;
+        const totalSlides = 5;
+
+        function updateSlide() {
+            slidesContainer.style.transform = `translateX(-${currentIndex * 20}%)`;
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentIndex);
+            });
+        }
+
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % totalSlides;
+            updateSlide();
+        }
+
+        function prevSlide() {
+            currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+            updateSlide();
+        }
+
+        // Button Clicks
+        nextBtn.addEventListener('click', nextSlide);
+        prevBtn.addEventListener('click', prevSlide);
+
+        // Dot Clicks
+        dots.forEach(dot => {
+            dot.addEventListener('click', (e) => {
+                currentIndex = parseInt(e.target.dataset.index);
+                updateSlide();
+            });
+        });
+
+        // Keyboard Controls (Arrow Left / Right)
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
+        });
+
+        // Touch Swipe Support for Mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            if (touchStartX - touchEndX > 50) nextSlide();
+            if (touchEndX - touchStartX > 50) prevSlide();
+        });
+    </script>
+</body>
+</html>
